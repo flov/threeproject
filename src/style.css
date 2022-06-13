@@ -3,3 +3,31 @@ canvas {
   top: 0;
   left: 0;
 }
+main {
+  position: absolute;
+  color: skyblue;
+  padding: 0 6rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+h1 {
+  font-size: 4rem;
+}
+p {
+  line-height: 3rem;
+  font-size: 2rem;
+}
+section {
+  grid-column: 2/8;
+  padding: 1rem;
+  background: black;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  opacity: 0.65;
+}
+blockquote {
+  grid-column: 4/11;
+}
+body {
+  position: relative;
+}
