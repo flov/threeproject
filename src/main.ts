@@ -10,7 +10,7 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector('#bg'),
+  canvas: document.querySelector<HTMLCanvasElement>('#bg')!,
 });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -64,12 +64,12 @@ Array(200)
 const moveCamera = () => {
   const t = document.body.getBoundingClientRect().top;
   camera.position.setX(t * -0.01);
-  camera.position.setY(a * -0.0002);
+  camera.position.setY(t * -0.0002);
   camera.position.setZ(30 + t * -0.0002);
-  camera.far
+  camera.far;
 };
 
-document.getElementsByTagName('body')[0].onscroll = moveCamera
+document.getElementsByTagName('body')[0].onscroll = moveCamera;
 
 const animate = () => {
   requestAnimationFrame(animate);
