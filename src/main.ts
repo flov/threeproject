@@ -1,6 +1,7 @@
 import './style.css';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import {
+  AmbientLight,
   GridHelper,
   MathUtils,
   Mesh,
@@ -12,8 +13,10 @@ import {
   Scene,
   SphereGeometry,
   TorusGeometry,
+  TorusKnotGeometry,
   WebGLRenderer,
 } from 'three';
+import * as THREE from 'three';
 
 const scene = new Scene();
 const sizes = {
@@ -27,14 +30,15 @@ const renderer = new WebGLRenderer({
 });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(sizes.width, sizes.height);
-camera.position.setZ(10);
+const initZPosition = 15;
+camera.position.setZ(initZPosition);
 
 renderer.render(scene, camera);
 
 const geometry = new TorusGeometry(10, 3, 16, 100);
-const material = new MeshBasicMaterial({
+const material = new THREE.MeshStandardMaterial({
   color: 0xffffff,
-  wireframe: true,
+  // wireframe: true,
 });
 const torus = new Mesh(geometry, material);
 
@@ -44,10 +48,13 @@ const pointLight = new PointLight(0xffffff, 1, 1000);
 pointLight.position.set(20, 10, 10);
 scene.add(pointLight);
 
-const gridHelper = new GridHelper(200, 50);
-scene.add(gridHelper);
+const spaceTexture = new THREE.TextureLoader().load('space-wallpaper-1.jpeg');
+scene.background = spaceTexture;
 
-// const ambientLight = new THREE.AmbientLight(0xfff, 3);
+// const gridHelper = new GridHelper(200, 50);
+// scene.add(gridHelper);
+
+// const ambientLight = new AmbientLight(0xfff, 1);
 // scene.add(ambientLight)
 
 const lightHelper = new PointLightHelper(pointLight);
@@ -70,15 +77,24 @@ const addStar = () => {
   scene.add(star);
 };
 
+const torusKnot = new Mesh(
+  new TorusKnotGeometry(5, 3, 100, 16),
+  new MeshStandardMaterial({ color: 0xffffff, wireframe: true })
+);
+torusKnot.position.setY(-30);
+
+scene.add(torusKnot);
+// camera.lookAt(torusKnot.position);
+
 Array(200)
   .fill(null)
   .forEach(() => addStar());
 
 const moveCamera = () => {
   const t = document.body.getBoundingClientRect().top;
-  camera.position.setX(t * -0.01);
-  camera.position.setY(t * -0.0002);
-  camera.position.setZ(30 + t * -0.0002);
+  camera.position.setX(t * -0.005);
+  camera.position.setY(t * 0.01);
+  camera.position.setZ(initZPosition + t * 0.002);
   camera.far;
 };
 
@@ -86,9 +102,12 @@ document.getElementsByTagName('body')[0].onscroll = moveCamera;
 
 renderer.render(scene, camera);
 const animate = () => {
-  // torus.rotateX(0.003);
-  // torus.rotateY(0.008);
-  // torus.rotateZ(0.001);
+  torus.rotateX(0.003);
+  torus.rotateY(0.008);
+  torus.rotateZ(0.009);
+  torusKnot.rotateX(0.004)
+  torusKnot.rotateY(0.007)
+  torusKnot.rotateY(0.009)
 
   controls.update();
   renderer.render(scene, camera);
