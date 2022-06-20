@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 canvas {
   position: fixed;
   top: 0;
@@ -5,25 +9,30 @@ canvas {
 }
 main {
   position: absolute;
-  color: skyblue;
-  padding: 0 6rem;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  color: white;
+  /* display: grid; */
+  /* grid-template-columns: repeat(12, 1fr); */
+  width: 80%;
+  margin: 10%;
+}
+.console {
+  font-family: 'Inconsolata', monospace;
 }
 h1 {
+  font-family: 'Great Vibes', cursive;
   font-size: 4rem;
 }
 p {
   line-height: 3rem;
+  font-family: 'Inconsolata', monospace;
   font-size: 2rem;
 }
 section {
-  grid-column: 2/8;
-  padding: 1rem;
-  background: black;
+  /* padding: 1rem; */
   font-size: 1.25rem;
   line-height: 1.5;
-  opacity: 0.65;
+  width: 80%;
+  margin: 10%;
 }
 blockquote {
   grid-column: 4/11;
