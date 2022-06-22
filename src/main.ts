@@ -1,11 +1,8 @@
 import './style.css';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import {
-  AmbientLight,
-  GridHelper,
   MathUtils,
   Mesh,
-  MeshBasicMaterial,
   MeshStandardMaterial,
   PerspectiveCamera,
   PointLight,
